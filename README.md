@@ -49,7 +49,7 @@ Open [http://localhost:3000](http://localhost:3000) to see the app.
 
 ## How it works
 
-- A list of korean restaurants in geojson format is statically served to the F/E.
+- A list of korean restaurants in geojson format is statically served to the F/E. These are displayed on the map when the app loads.
 - To find the nearest korean restaurant to the marker point, the B/E service queries the postgres database which contains the same list of restaurants.
 
 ## The Brief
