@@ -47,6 +47,11 @@ If you are not a Makefile person:
 
 Open [http://localhost:3000](http://localhost:3000) to see the app.
 
+## How it works
+
+- A list of korean restaurants in geojson format is statically served to the F/E.
+- To find the nearest korean restaurant to the marker point, the B/E service queries the postgres database which contains the same list of restaurants.
+
 ## The Brief
 
 I read
