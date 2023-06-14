@@ -1,4 +1,4 @@
-# Korean Restaurants F/E
+# Korean Restaurants
 
 This is a simple app to help me find my favourite korean restaurants. I live in Korea and I like to eat great food! This app will help me not to get hungry!
 
@@ -59,11 +59,12 @@ I came up with a simple concept, to build an app that could showcase my
 favourite korean restaurants and tell me where the closest one was - this is
 rather helpful as I live in Korea (at least for the next 12 months).
 
-I spent in total 16 hours comprised of:
+I spent in total 18 hours comprised of:
 
 - 4 hours of initial research
 - 4 hours on the B/E
 - 8 hours on the F/E
+- 2 hours of bug fixing/polishing/testing
 
 To build this, the steps I took were.
 
@@ -83,7 +84,7 @@ To build this, the steps I took were.
 - GeoJSON
 - Bit more react
 
-## Why you should hire me ?
+## Why should you hire me ?
 
 - I am a fast learner - learnt postgis, mapbox, ogr2ogr in a few hours
 - I am versatile with technical detail
