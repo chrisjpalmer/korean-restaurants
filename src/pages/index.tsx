@@ -141,6 +141,7 @@ export default function Home() {
     if (!nearestRst) {
       //if no nearestRst... remove the marker
       nearestRstMarker.current?.remove()
+      nearestRstMarker.current = null;
       return;
     };
 

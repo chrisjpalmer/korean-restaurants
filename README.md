@@ -33,6 +33,7 @@ If you are a Makefile person:
 
 ```sh
 make database
+make build-docker
 make serve-docker
 ```
 
@@ -40,6 +41,7 @@ If you are not a Makefile person:
 
 ```sh
 ./scripts/make-database.sh
+./scripts/build-docker.sh
 ./scripts/serve-docker.sh
 ```
 
