@@ -1,0 +1,138 @@
+{
+ "type": "FeatureCollection",
+ "name": "Korean Restaurants",
+ "crs": {
+  "type": "name",
+  "properties": {
+   "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+  }
+ },
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "Name": "Tasty Kalbi Restaurant",
+    "description": "This place has really good kalbi. Its also just opposite Starbucks, so you can easily get a coffee afterwards.",
+    "tessellate": -1,
+    "extrude": 0,
+    "visibility": -1
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     126.9711902547677,
+     37.22769003295954,
+     43.78437809373075
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "Name": "Jjajangmyong Restaurant",
+    "description": "This restaurant has great Jjajangmyong (black bean noodles) and Tangsuyuk (fried pork).",
+    "tessellate": -1,
+    "extrude": 0,
+    "visibility": -1
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     126.9745752913237,
+     37.22214152223785,
+     45.88607833072557
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "Name": "24 Hour Kongnamul KukBap",
+    "description": "This restaurant serves really good Bean sprouts soup with rice! A cheap and healthy option :)",
+    "tessellate": -1,
+    "extrude": 0,
+    "visibility": -1
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     127.0408286687906,
+     37.27608552892982,
+     44.72834191674812
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "Name": "The Little King's Kimbap",
+    "description": "Cute little Kimbap restaurant with a simple selection of tasty Kimbab rolls :)",
+    "tessellate": -1,
+    "extrude": 0,
+    "visibility": -1
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     127.0327110221075,
+     37.28116934603574,
+     51.00994050378893
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "Name": "The Attic Pub",
+    "description": "\"The Attic\" (다락방) serves many Korean pub food favorites and has a 1980's style interior. Good food and good vibes.",
+    "tessellate": -1,
+    "extrude": 0,
+    "visibility": -1
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     127.0329632998478,
+     37.28081007571132,
+     51.72726475968541
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "Name": "Beer King Pub",
+    "description": "This franchise restaurant offers nice korean pub food. There is a good range of different menu items, and the taste is great. Fun fact: the owner of the restaurant used to run a cafe here, but ended up turning into a pub because it was more profitable!! This was probably the case because of the mass of uni students that pass by this spot every day.",
+    "tessellate": -1,
+    "extrude": 0,
+    "visibility": -1
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     126.9747364367602,
+     37.22265010668237,
+     43.97082937402935
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "Name": "Ttdokkpoki House",
+    "description": "A cute little restaurant serving popular snack Ttdokkpoki (rice cake puffs) with a spicy sauce.",
+    "tessellate": -1,
+    "extrude": 0,
+    "visibility": -1
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     126.9775201550173,
+     37.22450239990378,
+     35.55338264945428
+    ]
+   }
+  }
+ ]
+}

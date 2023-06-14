@@ -1,38 +1,90 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Korean Restaurants F/E
+
+This is a simple app to help me find my favourite korean restaurants. I live in Korea and I like to eat great food! This app will help me not to get hungry!
+
+![](./screenshot.png)
+
+The accompanying B/E project for this is
+[here](https://github.com/chrisjpalmer/korean-restaurants-be).
 
 ## Getting Started
 
-First, run the development server:
+### Requirements
+- Docker
+- Node JS (I used v18)
+
+### Run the F/E app
 
 ```bash
+git clone https://github.com/chrisjpalmer/korean-restaurants
+cd korean-restaurants
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Run the B/E app
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```bash
+git clone https://github.com/chrisjpalmer/korean-restaurants-be
+cd korean-restaurants-be
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+If you are a Makefile person:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```sh
+make database
+make serve-docker
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+If you are not a Makefile person:
 
-## Learn More
+```sh
+./scripts/make-database.sh
+./scripts/serve-docker.sh
+```
 
-To learn more about Next.js, take a look at the following resources:
+Open [http://localhost:3000](http://localhost:3000) to see the app.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## The Brief
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+I read
+[this article](https://www.linkedin.com/pulse/right-size-your-geospatial-data-architecture-vector-michael-asher/?utm_source=share&utm_medium=member_ios&utm_campaign=share_via)
+by Michael Asher and wanted to see how quickly I could pick up a new software
+stack. I have never used postgis, mapbox, ogr2ogr OR geojson before. I'm also
+not a F/E developer by trade.
 
-## Deploy on Vercel
+I came up with a simple concept, to build an app that could showcase my
+favourite korean restaurants and tell me where the closest one was - this is
+rather helpful as I live in Korea (at least for the next 12 months).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+I spent in total 16 hours comprised of:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- 4 hours of initial research
+- 4 hours on the B/E
+- 8 hours on the F/E
+
+To build this, the steps I took were.
+
+1. Plotted my favourite korean restaurants on google earth
+2. Converted the KML file to GeoJSON using ogr2ogr
+3. Loaded the GeoJSON into a Postgis enabled database using ogr2ogr.
+4. Tested out some queries to familiarize myself with Postgis
+5. Built a simple B/E to query the database.
+6. Built a basic F/E app using react + mapbox.
+7. Wired up my B/E and F/E
+
+## Stuff Learnt
+
+- Postgis
+- Mapbox
+- Ogr2Ogr
+- GeoJSON
+- Bit more react
+
+## Why you should hire me ?
+
+- I am a fast learner - learnt postgis, mapbox, ogr2ogr in a few hours
+- I am versatile with technical detail
+- I like to GSD (get stuff done) - if you dont ship it, you don't make money.
+- I am organized - comments, code organization, documentation, diagrams are part
+  of my trade.
