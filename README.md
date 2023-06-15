@@ -12,6 +12,7 @@ The accompanying B/E project for this is
 ### Requirements
 - Docker
 - Node JS (I used v18)
+- Port 3000 & 3001 free on your machine
 
 ### Run the F/E app
 
