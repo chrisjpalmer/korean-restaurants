@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-import mapboxgl from 'mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
+import mapboxgl, { GeoJSONSource } from 'mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import { ChangeEventHandler, useEffect, useRef, useState } from 'react';
 import { Restaurant, RestaurantService } from '@/services/restaurant_service';
 import { createCircle } from '@/utils/circle';
@@ -131,7 +131,8 @@ export default function Home() {
       });
       setRangeCircleInitialized(true);
     } else {
-      map.current.getSource('range-circle').setData(circle.data);
+      let rangeCircle:GeoJSONSource = map.current.getSource('range-circle') as GeoJSONSource;
+      rangeCircle.setData(circle.data as GeoJSON.FeatureCollection<GeoJSON.Geometry>);
     }
   })
 

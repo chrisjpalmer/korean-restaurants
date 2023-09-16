@@ -2,7 +2,7 @@
 
 import mapboxgl from "mapbox-gl";
 
-export function createCircle(center:mapboxgl.LngLat, radiusInMeters:number, points:number = 64) : mapboxgl.AnySourceData {
+export function createCircle(center:mapboxgl.LngLat, radiusInMeters:number, points:number = 64) : mapboxgl.GeoJSONSourceRaw {
 
     var km = radiusInMeters / 1000;
 
