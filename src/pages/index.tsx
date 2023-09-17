@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import type { InferGetStaticPropsType, GetStaticProps } from 'next'
+import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 
 import mapboxgl, { GeoJSONSource } from 'mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import { ChangeEventHandler, useEffect, useRef, useState } from 'react';
@@ -15,16 +15,15 @@ const startingRange = 500;
 
 // initialize the services
 
-export const getStaticProps = (async (context) => {
+export const getServerSideProps = (async (context) => {
   const config = resolveConfig();
   return { props: { config } }
-}) satisfies GetStaticProps<{
+}) satisfies GetServerSideProps<{
   config: Config
 }>
- 
 
 
-export default function Home({config} : InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Home({config} : InferGetServerSidePropsType<typeof getServerSideProps>) {
   let mapContainer = useRef(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const restaurantService = new RestaurantService(config.restaurantServiceUrl)
