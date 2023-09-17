@@ -1,9 +1,11 @@
 import Head from 'next/head'
+import type { InferGetStaticPropsType, GetStaticProps } from 'next'
 
 import mapboxgl, { GeoJSONSource } from 'mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import { ChangeEventHandler, useEffect, useRef, useState } from 'react';
 import { Restaurant, RestaurantService } from '@/services/restaurant_service';
 import { createCircle } from '@/utils/circle';
+import { resolveConfig, Config } from '@/utils/config';
  
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2hyaXNqcGFsbWVyNiIsImEiOiJjbGl2ZXRuaTEwMWdrM2VwNWdlM3d5NnFmIn0.1UA6QogVDzWLngysTtpbEQ';
 
@@ -11,9 +13,21 @@ const startingCoordinates = new mapboxgl.LngLat(127.00280383971557, 37.257067501
 const zoomLevel = 12;
 const startingRange = 500;
 
-export default function Home() {
+// initialize the services
+
+export const getStaticProps = (async (context) => {
+  const config = resolveConfig();
+  return { props: { config } }
+}) satisfies GetStaticProps<{
+  config: Config
+}>
+ 
+
+
+export default function Home({config} : InferGetStaticPropsType<typeof getStaticProps>) {
   let mapContainer = useRef(null);
   const map = useRef<mapboxgl.Map | null>(null);
+  const restaurantService = new RestaurantService(config.restaurantServiceUrl)
   
   // selection marker
   const selectionMarker = useRef<mapboxgl.Marker | null>(null);
@@ -39,7 +53,6 @@ export default function Home() {
       console.log('selectionMarker not set... skipping')
       return;
     }
-    const restaurantService = new RestaurantService('http://localhost:3001')
     let restaurants = await restaurantService.FindRestaurants(selectionMarkerLatLng.lng, selectionMarkerLatLng.lat, range);
     if(restaurants.length == 0) {
       setNearestRst(null)
