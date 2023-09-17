@@ -34,7 +34,7 @@ jobs:
         id: create-version
         run: |
           VERSION=v`date +%Y%m%d-%H%M%S`
-          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "VERSION=$VERSION" >> "$GITHUB_OUTPUT"
           echo "created version tag: $VERSION"
 
       - name: Build and push
