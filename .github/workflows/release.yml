@@ -30,10 +30,17 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GHCR_TOKEN }}
 
+      - name: Create version
+        id: create-version
+        run: |
+          buildno=v`date +%Y%m%d-%H%M%S`
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "created version tag: $VERSION"
+
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: ghcr.io/chrisjpalmer/korean-restaurants:latest
+          tags: ghcr.io/chrisjpalmer/korean-restaurants:latest,ghcr.io/chrisjpalmer/korean-restaurants:${{ steps.create-version.outputs.VERSION }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
