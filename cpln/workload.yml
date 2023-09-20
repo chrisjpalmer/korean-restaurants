@@ -1,0 +1,41 @@
+kind: workload
+name: korean-restaurants
+description: korean-restaurants
+spec:
+  type: serverless
+  containers:
+    - name: korean-restaurants
+      cpu: 50m
+      env:
+        - name: RESTAURANT_SERVICE_URL
+          value: 'https://korean-restaurants-be-x1ncq0w8e0jnm.cpln.app'
+      image: '{{ .Env.IMAGE_TAG }}'
+      inheritEnv: false
+      memory: 128Mi
+      ports:
+        - number: 3000
+          protocol: http
+  defaultOptions:
+    autoscaling:
+      maxConcurrency: 1000
+      maxScale: 3
+      metric: concurrency
+      minScale: 1
+      scaleToZeroDelay: 300
+      target: 100
+    capacityAI: true
+    debug: false
+    suspend: false
+    timeoutSeconds: 5
+  firewallConfig:
+    external:
+      inboundAllowCIDR:
+        - 0.0.0.0/0
+      outboundAllowCIDR: []
+      outboundAllowHostname: []
+      outboundAllowPort: []
+    internal:
+      inboundAllowType: none
+      inboundAllowWorkload: []
+  localOptions: []
+  supportDynamicTags: false

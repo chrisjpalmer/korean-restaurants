@@ -8,8 +8,9 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+    outputs:
+      IMAGE_TAG: ${{ steps.create-image-tag.outputs.IMAGE_TAG }}
     steps:
       - uses: actions/checkout@v4
 
@@ -30,17 +31,59 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GHCR_TOKEN }}
 
-      - name: Create version
-        id: create-version
+      - name: Create image tag
+        id: create-image-tag
         run: |
           VERSION=v`date +%Y%m%d-%H%M%S`
-          echo "VERSION=$VERSION" >> "$GITHUB_OUTPUT"
           echo "created version tag: $VERSION"
+          IMAGE_TAG=ghcr.io/${{ github.repository }}:$VERSION
+          echo "created image tag: $IMAGE_TAG"
+          echo "IMAGE_TAG=$IMAGE_TAG" >> "$GITHUB_OUTPUT"
 
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: ghcr.io/chrisjpalmer/korean-restaurants:latest,ghcr.io/chrisjpalmer/korean-restaurants:${{ steps.create-version.outputs.VERSION }}
+          tags: ghcr.io/${{ github.repository }}:latest,${{ steps.create-image-tag.outputs.IMAGE_TAG }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+  release:
+    needs: build
+    environment: production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+            go-version: '1.21'
+
+      - name: Install Control Plane CLI
+        shell: bash
+        run: |
+          sudo npm install -g @controlplane/cli
+          cpln --version
+
+      - name: Install gomplate
+        shell: bash
+        run: |
+          go install github.com/hairyhenderson/gomplate/v4/cmd/gomplate@latest
+
+      - name: Substitute Tokens in Control Plane YAML Files
+        shell: bash
+        working-directory: ./cpln
+        env:
+          IMAGE_TAG: ${{needs.build.outputs.IMAGE_TAG}}
+        run: |
+          cat workload.yaml | gomplate > workload.yaml
+
+      - name: Run CPLN Apply 
+        shell: bash
+        working-directory: ./cpln
+        env: 
+          CPLN_ORG: ${{secrets.CPLN_ORG}}
+          CPLN_GVC: ${{secrets.CPLN_GVC_NAME}}
+          CPLN_WORKLOAD: ${{secrets.CPLN_WORKLOAD_NAME}}
+          CPLN_TOKEN: ${{secrets.CPLN_TOKEN}}
+        run: |
+          cpln apply -f cpln-workload.yaml --gvc ${CPLN_GVC}
