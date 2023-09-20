@@ -76,7 +76,7 @@ jobs:
         env:
           IMAGE_TAG: ${{needs.build.outputs.IMAGE_TAG}}
         run: |
-          gomplate -f cpln/workload.yaml > cpln/workload.yaml
+          gomplate -f cpln/workload.yml > cpln/workload.yml
 
       - name: Run CPLN Apply 
         shell: bash
