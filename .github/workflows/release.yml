@@ -54,7 +54,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Set up Go
         uses: actions/setup-go@v4
         with:
@@ -82,8 +82,8 @@ jobs:
         shell: bash
         env: 
           CPLN_ORG: ${{secrets.CPLN_ORG}}
-          CPLN_GVC: ${{secrets.CPLN_GVC_NAME}}
-          CPLN_WORKLOAD: ${{secrets.CPLN_WORKLOAD_NAME}}
+          CPLN_GVC: ${{secrets.CPLN_GVC}}
+          CPLN_WORKLOAD: ${{secrets.CPLN_WORKLOAD}}
           CPLN_TOKEN: ${{secrets.CPLN_TOKEN}}
         run: |
           cpln apply -f cpln/workload.yaml --gvc ${CPLN_GVC}
