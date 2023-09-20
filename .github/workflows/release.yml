@@ -85,4 +85,4 @@ jobs:
           CPLN_TOKEN: ${{secrets.CPLN_TOKEN}}
         run: |
           cpln profile update default --token ${CPLN_TOKEN}
-          cpln apply -f cpln/workload.yaml --gvc ${CPLN_GVC}
+          cpln apply -f cpln/workload.yml --gvc ${CPLN_GVC}
