@@ -86,3 +86,4 @@ jobs:
         run: |
           cpln profile update default --token ${CPLN_TOKEN}
           cpln apply -f cpln/workload.yml --gvc ${CPLN_GVC}
+          sleep 1
