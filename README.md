@@ -3,18 +3,14 @@
 This is a simple app to help me find my favourite korean restaurants. I live in
 Korea and I like to eat great food! This app will help me not to get hungry!
 
+View it live here: https://korean-restaurants-x1ncq0w8e0jnm.cpln.app/ . _Be
+kind, its serverless so refresh a few times to trigger the first container
+coming online (I'm a starving engineer)_. Hosted on **[Control Plane](https://controlplane.com)**
+
 ![](./screenshot.png)
 
 The accompanying B/E project for this is
 [here](https://github.com/chrisjpalmer/korean-restaurants-be).
-
-**_UPDATE: Hosted on Control Plane_**
-
-A live version of the app can be viewed here:
-
-https://korean-restaurants-x1ncq0w8e0jnm.cpln.app/
-
-Be kind, its serverless, so the page needs a few refreshes before a container comes up ready to serve you traffic. I would do a normal deployment, *but I'm a starving engineer.*
 
 ## Getting Started
 
@@ -110,8 +106,8 @@ I have implemented a continuous delivery pipeline that deploys to
 5. Applies it to Control Plane.
 
 Control Plane is a tool that allows you to orchestrate multiple kubernetes
-clusters across clouds, implementing the best DevSecOps practices under the
-hood for you. My services are running serverless in both GCP, and AWS. Read more
+clusters across clouds, implementing the best DevSecOps practices under the hood
+for you. My services are running serverless in both GCP, and AWS. Read more
 [here](https://docs.controlplane.com/whatis).
 
 ## Stuff Learnt
