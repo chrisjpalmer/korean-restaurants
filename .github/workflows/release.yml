@@ -62,7 +62,7 @@ jobs:
       - name: Push
         uses: docker/build-push-action@v5
         with:
-          push: false
+          push: true
           tags: ghcr.io/${{ github.repository }}:latest,${{ steps.create-image-tag.outputs.IMAGE_TAG }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
