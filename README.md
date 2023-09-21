@@ -5,7 +5,8 @@ Korea and I like to eat great food! This app will help me not to get hungry!
 
 View it live here: https://korean-restaurants-x1ncq0w8e0jnm.cpln.app/ . _Be
 kind, its serverless so refresh a few times to trigger the first container
-coming online (I'm a starving engineer)_. Hosted on **[Control Plane](https://controlplane.com)**
+coming online (I'm a starving engineer)_. Hosted on
+**[Control Plane](https://controlplane.com)**
 
 ![](./screenshot.png)
 
@@ -96,20 +97,6 @@ All commits after June 15 were to set up my hosting on
 [Control Plane](https://controlplane.com/). The commit history is a bit of a
 mess because I was just having some fun at this point.
 
-I have implemented a continuous delivery pipeline that deploys to
-[Control Plane](https://controlplane.com/). It does the following steps:
-
-1. Builds a docker image
-2. Runs trivy image scan
-3. Publishes the docker image
-4. Creates a Control Plane workload file
-5. Applies it to Control Plane.
-
-Control Plane is a tool that allows you to orchestrate multiple kubernetes
-clusters across clouds, implementing the best DevSecOps practices under the hood
-for you. My services are running serverless in both GCP, and AWS. Read more
-[here](https://docs.controlplane.com/whatis).
-
 ## Stuff Learnt
 
 - Postgis
@@ -125,3 +112,64 @@ for you. My services are running serverless in both GCP, and AWS. Read more
 - I like to GSD (get stuff done) - if you dont ship it, you don't make money.
 - I am organized - comments, code organization, documentation, diagrams are part
   of my trade.
+
+## DevSecOps
+
+I believe DecSecOps is an important part of software development. In this
+project I implemented a few good practices:
+
+1. Sensitive data stored in github secrets.
+2. Trivy image scanning before artifacts are published.
+3. Dependabot enabled so if a CVE is detected in a dependency being used, GitHub
+   generates a PR with the dependency update.
+4. Automated CI/CD process to eliminate human error during deployment.
+
+Ultimately to do DevSecOps properly, security needs to be in the mindset of the
+organization and be part of every process in the Software Development Life Cycle
+(SDLC). Here are some examples of things you could do in different stages of the
+SDLC to implement DevSecOps:
+
+**Requirements / Planning**
+
+- Are any access controls required to keep users safe?
+
+**Architectural Design**
+
+- Consider impacts of architectural changes - could it be exploited?
+
+**Development**
+
+- Consider impacts of code to be written - could it be exploited?
+- Use static analysis tools
+- Write unit tests designed to break modules / exploit common attack vectors
+- Artifact scanning
+- Codebase scanning
+
+**Testing**
+
+- Write integration tests designed to break services / exploit common attack
+  vectors
+
+**Deployment**
+
+- In-cluster artifact scanning
+- Chaos testing
+- Run integration tests regularly
+
+## About Control Plane
+
+This application was deployed with Control Plane. Control Plane allows you to
+deploy containerized workloads to multiple cloud providers without having to
+manage the underlying infrastructure. Under the hood Control Plane uses
+kubernetes and istio. This allows an operator to define a simple definition of
+their workload, and have it deployed across cloud providers. This application is
+deployed across AWS and GCP clusters.
+
+![](./doc/images/deployment.excalidraw.png)
+
+The B/E service for this application depends on a postgres database to operate.
+An RDS instance was deployed to AWS, and then linked to the Control Plane
+account using an _Agent_. _Agents_ allows workloads deployed to Control Plane to
+consume services in another VPC or private network.
+
+![](./doc/images/agent.excalidraw.png)
