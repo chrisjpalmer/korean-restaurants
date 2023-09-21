@@ -123,9 +123,10 @@ main {
   position: absolute;
   top: 20px;
   left: 20px;
-  background-color: #00000080;
+  background-color: #00000090;
   padding: 7px;
   border-radius: 5px;
+  width: 600px;
 }
 
 .controls > *, .nearest-restaurant-info > * {
@@ -134,7 +135,7 @@ main {
 }
 
 .controls > label {
-  color: rgba(219, 219, 219, 0.996);
+  color: #FFFFFF
 }
 
 .nearest-restaurant-info > label {
@@ -150,5 +151,7 @@ main {
 }
 
 button {
+  margin-left: 10px;
   padding: 2px;
+  height: 30px;
 }

@@ -184,12 +184,18 @@ export default function Home({config} : InferGetServerSidePropsType<typeof getSe
     <main>
       <div ref={mapContainer} className="map-container" />
       <div className="controls">
-        <label className="help-text">Click anywhere add a marker, then click [Find Nearest] to get the nearest restaurant</label>
-        <label className="range"><input type="range" min="0" max="2000" onChange={changeRange} value={range}></input> {range}m</label>
-        <button className="find" disabled={!selectionMarkerLatLng} onClick={findNearest}>Find Nearest</button>
+        <label className="help-text">Click anywhere to add a marker.</label>
+        <label className="help-text">Click Find Nearest to see the nearest restaurant to your marker <b>within the range</b>. (restaurants are red dots)</label>
+        <label className="help-text">Adjust the slider to adjust the range.</label>
+        <label className="range">
+          <input type="range" min="0" max="2000" onChange={changeRange} value={range}></input> {range}m
+          <button className="find" disabled={!selectionMarkerLatLng} onClick={findNearest}>Find Nearest</button>
+          </label>
+        
         {(!!nearestRst) ? 
           (
           <div className="nearest-restaurant-info">
+            <label className="name"><b>Found a restaurant!</b></label>
             <label className="name"><b>Name:</b> {nearestRst.name}</label>
             <label className="name"><b>Description:</b> {nearestRst.description}</label>
           </div>
