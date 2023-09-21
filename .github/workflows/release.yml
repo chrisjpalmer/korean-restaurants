@@ -76,7 +76,7 @@ jobs:
         env:
           IMAGE_TAG: ${{needs.build.outputs.IMAGE_TAG}}
         run: |
-          gomplate -f cpln/workload.yml > cpln/workload.yml
+          gomplate -f cpln/workload.yml > cpln/workload_rendered.yml
 
       - name: Run CPLN Apply 
         shell: bash
@@ -85,5 +85,5 @@ jobs:
           CPLN_TOKEN: ${{secrets.CPLN_TOKEN}}
         run: |
           cpln profile update default --token ${CPLN_TOKEN}
-          cpln apply -f cpln/workload.yml --gvc ${CPLN_GVC}
+          cpln apply -f cpln/workload_rendered.yml --gvc ${CPLN_GVC}
           sleep 1
