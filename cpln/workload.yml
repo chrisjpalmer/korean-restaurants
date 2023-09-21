@@ -26,7 +26,7 @@ spec:
     capacityAI: false
     debug: false
     suspend: false
-    timeoutSeconds: 5
+    timeoutSeconds: 15
   firewallConfig:
     external:
       inboundAllowCIDR:
