@@ -4,7 +4,8 @@ This is a simple app to help me find my favourite korean restaurants. I live in
 Korea and I like to eat great food! This app will help me not to get hungry!
 
 View it live here: https://korean-restaurants-x1ncq0w8e0jnm.cpln.app/ (Hosted on
-**[Control Plane](https://controlplane.com)**). *Apologies, initial load will be a bit slow, because it needs to scale up if it hasn't had traffic recently.*
+**[Control Plane](https://controlplane.com)**). _Apologies, initial load will be
+a bit slow, because it needs to scale up if it hasn't had traffic recently._
 
 ![](./screenshot.png)
 
@@ -129,24 +130,47 @@ SDLC to implement DevSecOps:
 
 **Requirements / Planning**
 
-- Are any access controls required to keep users safe?
+- Are access controls implemented at the application level to keep users safe?
+- Are there any escalation of privilege scenarios in the application level?
+- Avoid misleading users into unsafe usage patterns that an attacker could take
+  advantage of + remind them what the correct usage patterns are ("SafeBank will
+  never ask for your password over the phone").
+- Encourage MFA
 
 **Architectural Design**
 
-- Consider impacts of architectural changes - could it be exploited?
+- Consider potential DoS attacks on architectural change.
+- Consider potential escalation of privilege attacks on architectural change.
+- Mitigate "unhappy paths" that lead to an inconsistent state across services.
+- If SaaS platform, enforce Tenancy at the database level in every service.
+- Is principle of least privilege implemented? - check every commponent, ask
+  what privileges it has and why?
+- Multiple protections for the same thing (E.g. dont expose insecure APIs in
+  routing rules AND only whitelist secure APIs on security policies)
+- Use of temporary credentials with credential manager such as Vault.
+- Istio: enforce MTLs and default deny all service-to-service communication
+  unless explicitly whitelisted via `AuthorizationPolicy`.
 
 **Development**
 
 - Consider impacts of code to be written - could it be exploited?
-- Use static analysis tools
 - Write unit tests designed to break modules / exploit common attack vectors
-- Artifact scanning
+- Prevent commiting secrets using git commit hooks.
+- Static analysis tools
 - Codebase scanning
+- Build
+  [Best Practice](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
+  Docker Images
+- Docker Image scanning
 
 **Testing**
 
 - Write integration tests designed to break services / exploit common attack
-  vectors
+  vectors.
+- Write integration tests to validate security boundaries are implemented.
+- Establish a culture of never exposing insecure APIs for testing even in the
+  development environment. Solve using in-cluster integration testing (better
+  still trust your Unit tests and dont expose at all).
 
 **Deployment**
 
