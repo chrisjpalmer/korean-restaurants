@@ -1,15 +1,25 @@
 # Korean Restaurants
 
-This is a simple app to help me find my favourite korean restaurants. I live in Korea and I like to eat great food! This app will help me not to get hungry!
+This is a simple app to help me find my favourite korean restaurants. I live in
+Korea and I like to eat great food! This app will help me not to get hungry!
 
 ![](./screenshot.png)
 
 The accompanying B/E project for this is
 [here](https://github.com/chrisjpalmer/korean-restaurants-be).
 
+**_UPDATE: Hosted on Control Plane_**
+
+A live version of the app can be viewed here:
+
+https://korean-restaurants-x1ncq0w8e0jnm.cpln.app/
+
+Be kind, its serverless, so the page needs a few refreshes before a container comes up ready to serve you traffic. I would do a normal deployment, *but I'm a starving engineer.*
+
 ## Getting Started
 
 ### Requirements
+
 - Docker
 - Node JS (I used v18)
 - Port 3000 & 3001 free on your machine
@@ -50,8 +60,10 @@ Open [http://localhost:3000](http://localhost:3000) to see the app.
 
 ## How it works
 
-- A list of korean restaurants in geojson format is statically served to the F/E. These are displayed on the map when the app loads.
-- To find the nearest korean restaurant to the marker point, the B/E service queries the postgres database which contains the same list of restaurants.
+- A list of korean restaurants in geojson format is statically served to the
+  F/E. These are displayed on the map when the app loads.
+- To find the nearest korean restaurant to the marker point, the B/E service
+  queries the postgres database which contains the same list of restaurants.
 
 ## The Brief
 
@@ -81,6 +93,26 @@ To build this, the steps I took were.
 5. Built a simple B/E to query the database.
 6. Built a basic F/E app using react + mapbox.
 7. Wired up my B/E and F/E
+
+**_Update: CI/CD with Control Plane_**
+
+All commits after June 15 were to set up my hosting on
+[Control Plane](https://controlplane.com/). The commit history is a bit of a
+mess because I was just having some fun at this point.
+
+I have implemented a continuous delivery pipeline that deploys to
+[Control Plane](https://controlplane.com/). It does the following steps:
+
+1. Builds a docker image
+2. Runs trivy image scan
+3. Publishes the docker image
+4. Creates a Control Plane workload file
+5. Applies it to Control Plane.
+
+Control Plane is a tool that allows you to orchestrate multiple kubernetes
+clusters across clouds, implementing the best DevSecOps practices under the
+hood for you. My services are running serverless in both GCP, and AWS. Read more
+[here](https://docs.controlplane.com/whatis).
 
 ## Stuff Learnt
 
