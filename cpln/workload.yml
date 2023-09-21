@@ -2,7 +2,7 @@ kind: workload
 name: korean-restaurants
 description: korean-restaurants
 spec:
-  type: serverless
+  type: standard
   containers:
     - name: korean-restaurants
       cpu: 50m
