@@ -3,8 +3,8 @@
 This is a simple app to help me find my favourite korean restaurants. I live in
 Korea and I like to eat great food! This app will help me not to get hungry!
 
-View it live here: https://korean-restaurants-x1ncq0w8e0jnm.cpln.app/ . Hosted on
-**[Control Plane](https://controlplane.com)**
+View it live here: https://korean-restaurants-x1ncq0w8e0jnm.cpln.app/ (Hosted on
+**[Control Plane](https://controlplane.com)**). *Apologies, initial load will be a bit slow, because it needs to scale up if it hasn't had traffic recently.*
 
 ![](./screenshot.png)
 
