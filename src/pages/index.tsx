@@ -6,6 +6,8 @@ import { ChangeEventHandler, useEffect, useRef, useState } from 'react';
 import { Restaurant, RestaurantService } from '@/services/restaurant_service';
 import { createCircle } from '@/utils/circle';
 import { resolveConfig, Config } from '@/utils/config';
+import { css } from '@emotion/css'
+import Progress from '@mui/material/CircularProgress';
  
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2hyaXNqcGFsbWVyNiIsImEiOiJjbGl2ZXRuaTEwMWdrM2VwNWdlM3d5NnFmIn0.1UA6QogVDzWLngysTtpbEQ';
 
@@ -27,6 +29,8 @@ export default function Home({config} : InferGetServerSidePropsType<typeof getSe
   let mapContainer = useRef(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const restaurantService = new RestaurantService(config.restaurantServiceUrl)
+
+  const [requestInProgress, setRequestInProgress] = useState(false);
   
   // selection marker
   const selectionMarker = useRef<mapboxgl.Marker | null>(null);
@@ -52,13 +56,20 @@ export default function Home({config} : InferGetServerSidePropsType<typeof getSe
       console.log('selectionMarker not set... skipping')
       return;
     }
-    let restaurants = await restaurantService.FindRestaurants(selectionMarkerLatLng.lng, selectionMarkerLatLng.lat, range);
-    if(restaurants.length == 0) {
-      setNearestRst(null)
-    } else {
-      let coord = restaurants[0].coordinates;
-      setNearestRst(restaurants[0])
+    setRequestInProgress(true);
+    try {
+      let restaurants = await restaurantService.FindRestaurants(selectionMarkerLatLng.lng, selectionMarkerLatLng.lat, range);
+      setRequestInProgress(false);
+      if(restaurants.length == 0) {
+        setNearestRst(null)
+      } else {
+        setNearestRst(restaurants[0])
+      }
+    } catch(e) {
+      console.log("error occurred while finding restaurants", e)
+      setRequestInProgress(false);
     }
+    
   }
 
   //setting the map
@@ -190,7 +201,17 @@ export default function Home({config} : InferGetServerSidePropsType<typeof getSe
         <label className="range">
           <input type="range" min="0" max="2000" onChange={changeRange} value={range}></input> {range}m
           <button className="find" disabled={!selectionMarkerLatLng} onClick={findNearest}>Find Nearest</button>
-          </label>
+          {requestInProgress ? (
+            <Progress size={27} className={css`
+            position:relative;
+            top: 10px;
+            margin-left: 7px;
+            `}
+            sx={{
+              color: "#5cb0ff"
+            }}></Progress>
+          ) : <></>}
+        </label>
         
         {(!!nearestRst) ? 
           (
