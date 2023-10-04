@@ -8,7 +8,7 @@ spec:
       cpu: 50m
       env:
         - name: RESTAURANT_SERVICE_URL
-          value: 'https://korean-restaurants-be-x1ncq0w8e0jnm.cpln.app'
+          value: 'https://korean-restaurants-bev2-x1ncq0w8e0jnm.cpln.app'
       image: '{{ .Env.IMAGE_TAG }}'
       inheritEnv: false
       memory: 128Mi
