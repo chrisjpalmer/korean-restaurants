@@ -12,7 +12,7 @@
     "@emotion/css": "^11.11.2",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@mui/material": "^5.14.14",
+    "@mui/material": "^5.15.4",
     "@types/mapbox-gl": "^2.7.15",
     "@types/node": "20.8.7",
     "@types/react": "18.2.31",
